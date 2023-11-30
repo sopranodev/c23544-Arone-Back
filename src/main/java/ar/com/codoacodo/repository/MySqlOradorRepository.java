@@ -24,7 +24,7 @@ public class MySqlOradorRepository implements OradorRepository {
 			statement.setString(2, orador.getApellido());
 			statement.setString(3, orador.getTema());
 			statement.setString(4, orador.getMail());
-			statement.setTimestamp(5, DateUtils.asLocalDateTime(orador.getFechaAlta()).getTime());
+			statement.setTimestamp(5, new java.sql.Timestamp(DateUtils.asTimeStamp(orador.getFechaAlta()).getTime()));
 
 			statement.executeUpdate();// INSERT/UPDATE/DELETE
 

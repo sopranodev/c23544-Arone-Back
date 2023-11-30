@@ -24,6 +24,10 @@ public class DateUtils {
 	public static LocalDateTime asLocalDateTime(Date date) {
 		return Instant.ofEpochMilli(date.getTime()).atZone(ZoneId.systemDefault()).toLocalDateTime();
 	}
+	
+	public static Timestamp asTimeStamp(LocalDateTime localDateTime) {
+		return Timestamp.from(localDateTime.atZone(ZoneId.systemDefault()).toInstant());
+	}
 
 	public static LocalDateTime asLocalDateTime(Timestamp timeStamp) {
 		return Instant.ofEpochMilli(timeStamp.getTime()).atZone(ZoneId.systemDefault()).toLocalDateTime();

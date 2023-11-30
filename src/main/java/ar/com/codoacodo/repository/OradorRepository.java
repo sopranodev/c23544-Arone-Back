@@ -6,6 +6,7 @@ import java.util.List;
 import ar.com.codoacodo.entity.Orador;
 
 public interface OradorRepository {
+	
 	public void save(Orador orador);
 
 	public Orador getById(Long id);
