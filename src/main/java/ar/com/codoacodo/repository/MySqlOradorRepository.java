@@ -40,7 +40,7 @@ public class MySqlOradorRepository implements OradorRepository {
 
 	public Orador getById(Long id) {
 
-		String sql = "select id, nombre, apellido, tema, mail, fecha_alta from oradores where id = ?";
+		String sql = "select id_orador, nombre, apellido, tema, mail, fecha_alta from oradores where id_orador = ?";
 
 		Orador orador = null;
 		try(Connection con = AdministradorDeConexiones.getConnection()) {
@@ -69,8 +69,8 @@ public class MySqlOradorRepository implements OradorRepository {
 	@Override
 	public void update(Orador orador) {
 		String sql = "update orador "
-				+ "set nombre=?, apellido=?, email=?, tema=? "
-				+ "where id = ?";
+				+ "set nombre=?, apellido=?, mail=?, tema=? "
+				+ "where id_orador = ?";
 		
 		//try with resources
 		try(Connection con = AdministradorDeConexiones.getConnection()) {
@@ -92,7 +92,7 @@ public class MySqlOradorRepository implements OradorRepository {
 	@Override
 	public void delete(Long id) {
 		
-		String sql = "delete from orador where id = ?";
+		String sql = "delete from orador where id_orador = ?";
 		
 		//try with resources
 		try(Connection con = AdministradorDeConexiones.getConnection()) {
@@ -109,7 +109,7 @@ public class MySqlOradorRepository implements OradorRepository {
 
 	public List<Orador> findAll() {
 
-		String sql = "select id, nombre, apellido, tema, email, fecha_alta from orador";
+		String sql = "select id_orador, nombre, apellido, tema, email, fecha_alta from orador";
 
 		List<Orador> oradores = new ArrayList<>();//se ve bien en spring!
 		
