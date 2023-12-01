@@ -15,7 +15,7 @@ public class MySqlOradorRepository implements OradorRepository {
 	public void save(Orador orador) {
 		// get del orador para obtener datos
 
-		// 2 - preparo sql: sql injeciton!
+		// 2 - preparo sql: sql injection!
 		String sql = "insert into oradores (nombre, apellido, tema, mail, fecha_alta) values (?,?,?,?,?)";
 
 		try(Connection con = AdministradorDeConexiones.getConnection()) {
@@ -109,7 +109,7 @@ public class MySqlOradorRepository implements OradorRepository {
 
 	public List<Orador> findAll() {
 
-		String sql = "select id_orador, nombre, apellido, tema, email, fecha_alta from orador";
+		String sql = "select id_orador, nombre, apellido, tema, mail, fecha_alta from oradores";
 
 		List<Orador> oradores = new ArrayList<>();//se ve bien en spring!
 		
