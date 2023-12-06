@@ -23,7 +23,7 @@ public class AdministradorDeConexiones {
 			Class.forName(diverName);
 			return DriverManager.getConnection(dbUrl, username, password);
 		}catch(Exception e) {
-			throw new IllegalArgumentException("No se pudo conectar a la db: " + dbUrl);
+			throw new IllegalArgumentException("No se pudo conectar a la db: " + dbUrl + " - " + diverName);
 		}
 	}
 }

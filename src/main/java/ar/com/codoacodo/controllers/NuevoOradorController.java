@@ -2,6 +2,7 @@ package ar.com.codoacodo.controllers;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.util.stream.Collectors;
 
 import ar.com.codoacodo.entity.Orador;
 import ar.com.codoacodo.repository.MySqlOradorRepository;
@@ -12,7 +13,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-@WebServlet("/api/orador/nuevo")
+@WebServlet("/api/orador")
 public class NuevoOradorController extends HttpServlet{
 
 	//crear > POST
@@ -22,13 +23,18 @@ public class NuevoOradorController extends HttpServlet{
 			) throws ServletException, IOException {
 		
 		//capturo los parametros enviados por el front
+		String json = request.getReader()
+				.lines()
+				.collect(Collectors.joining(System.lineSeparator()));//spring
+		
 		String nombre = request.getParameter("nombre");
 		String apellido = request.getParameter("apellido");
 		String email = request.getParameter("email");
 		String tema = request.getParameter("tema");
+		String resumen = request.getParameter("resumen");
 		
 		//creo mi orador con esos paramtros
-		Orador nuevo = new Orador(nombre, apellido, email, tema, LocalDateTime.now());
+		Orador nuevo = new Orador(nombre, apellido, email, tema, resumen, LocalDateTime.now());
 		
 		//ahora por medio del repository guarda en la db
 		OradorRepository repository = new MySqlOradorRepository();

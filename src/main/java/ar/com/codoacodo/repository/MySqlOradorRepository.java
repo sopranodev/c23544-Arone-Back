@@ -23,6 +23,7 @@ public class MySqlOradorRepository implements OradorRepository {
 			statement.setString(1, orador.getNombre());
 			statement.setString(2, orador.getApellido());
 			statement.setString(3, orador.getTema());
+			statement.setString(3, orador.getResumen());
 			statement.setString(4, orador.getMail());
 			statement.setTimestamp(5, new java.sql.Timestamp(DateUtils.asTimeStamp(orador.getFechaAlta()).getTime()));
 
@@ -54,10 +55,11 @@ public class MySqlOradorRepository implements OradorRepository {
 				String nombre = res.getString(2);  
 				String apellido = res.getString(3);  
 				String tema = res.getString(4);  
-				String email = res.getString(5);  
-				LocalDateTime fechaAlta = DateUtils.asLocalDateTime(res.getTimestamp(6)); 
+				String email = res.getString(5); 
+				String resumen = res.getString(6);
+				LocalDateTime fechaAlta = DateUtils.asLocalDateTime(res.getTimestamp(7)); 
 				
-			orador = new Orador(dbId, nombre, apellido, email, tema,fechaAlta);
+			orador = new Orador(dbId, nombre, apellido, email, tema, resumen, fechaAlta);
 			}
 			
 		} catch (Exception e) {
@@ -69,7 +71,7 @@ public class MySqlOradorRepository implements OradorRepository {
 	@Override
 	public void update(Orador orador) {
 		String sql = "update orador "
-				+ "set nombre=?, apellido=?, mail=?, tema=? "
+				+ "set nombre=?, apellido=?, mail=?, tema=?, resumen=? "
 				+ "where id_orador = ?";
 		
 		//try with resources
@@ -81,7 +83,8 @@ public class MySqlOradorRepository implements OradorRepository {
 			statement.setString(2, orador.getApellido());
 			statement.setString(3, orador.getMail());
 			statement.setString(4, orador.getTema());
-			statement.setLong(5, orador.getId());
+			statement.setString(5, orador.getResumen());
+			statement.setLong(6, orador.getId());
 			
 			statement.executeUpdate();
 		}catch (Exception e) {
@@ -109,7 +112,7 @@ public class MySqlOradorRepository implements OradorRepository {
 
 	public List<Orador> findAll() {
 
-		String sql = "select id_orador, nombre, apellido, tema, mail, fecha_alta from oradores";
+		String sql = "select id_orador, nombre, apellido, tema, mail, resumen, fecha_alta from oradores";
 
 		List<Orador> oradores = new ArrayList<>();//se ve bien en spring!
 		
@@ -118,16 +121,17 @@ public class MySqlOradorRepository implements OradorRepository {
 			PreparedStatement statement = con.prepareStatement(sql);
 
 			ResultSet res = statement.executeQuery();// SELECT
-
+			//hay datos?
 			while (res.next()) {
 				Long dbId = res.getLong(1);  
 				String nombre = res.getString(2);  
 				String apellido = res.getString(3);  
 				String tema = res.getString(4);  
 				String email = res.getString(5);  
-				LocalDateTime fechaAlta = DateUtils.asLocalDateTime(res.getTimestamp(6));  
+				String resumen = res.getString(6);
+				LocalDateTime fechaAlta = DateUtils.asLocalDateTime(res.getTimestamp(7));  
 				
-				oradores.add(new Orador(dbId, nombre, apellido, email, tema,fechaAlta));
+				oradores.add(new Orador(dbId, nombre, apellido, email, tema,resumen, fechaAlta));
 			}
 			
 		} catch (Exception e) {
