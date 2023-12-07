@@ -29,7 +29,7 @@ public class NuevoOradorController extends HttpServlet{
 		
 		String nombre = request.getParameter("nombre");
 		String apellido = request.getParameter("apellido");
-		String email = request.getParameter("email");
+		String email = request.getParameter("mail");
 		String tema = request.getParameter("tema");
 		String resumen = request.getParameter("resumen");
 		

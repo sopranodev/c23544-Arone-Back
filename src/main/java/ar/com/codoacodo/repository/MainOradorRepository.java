@@ -11,7 +11,7 @@ public class MainOradorRepository {
 		 //Interface i = new ClaseQueImplementa();
 		 OradorRepository repository = new MySqlOradorRepository();
 		 
-		 Orador newOrador = new Orador("Marcela", "Juárez", "mjuarez@email.com", "férulas 3D", "La invención de las férulas hace que el tendón se recupere más rápido", LocalDateTime.now());
+		 Orador newOrador = new Orador("Marcela", "Juárez", "mjuarez@gmail.com", "flexores", "Cómo recuperarse de una epicondilitise más rápido", LocalDateTime.now());
 		 repository.save(newOrador);
 		 
 	//	 repository.save(new Orador);
