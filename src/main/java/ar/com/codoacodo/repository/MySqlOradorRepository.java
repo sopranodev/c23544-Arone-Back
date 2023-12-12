@@ -70,7 +70,7 @@ public class MySqlOradorRepository implements OradorRepository {
 
 	@Override
 	public void update(Orador orador) {
-		String sql = "update orador "
+		String sql = "update oradores "
 				+ "set nombre=?, apellido=?, mail=?, tema=?, resumen=? "
 				+ "where id_orador = ?";
 		
@@ -95,7 +95,7 @@ public class MySqlOradorRepository implements OradorRepository {
 	@Override
 	public void delete(Long id) {
 		
-		String sql = "delete from orador where id_orador = ?";
+		String sql = "delete from oradores where id_orador = ?";
 		
 		//try with resources
 		try(Connection con = AdministradorDeConexiones.getConnection()) {
@@ -131,7 +131,7 @@ public class MySqlOradorRepository implements OradorRepository {
 				String resumen = res.getString(6);
 				LocalDateTime fechaAlta = DateUtils.asLocalDateTime(res.getTimestamp(7));  
 				
-				oradores.add(new Orador(dbId, nombre, apellido, email, tema,resumen, fechaAlta));
+				oradores.add(new Orador(dbId, nombre, apellido, email, tema, resumen, fechaAlta));
 			}
 			
 		} catch (Exception e) {
