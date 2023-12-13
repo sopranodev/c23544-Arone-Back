@@ -117,7 +117,7 @@ public class NuevoOradorController extends HttpServlet{
 		orador.setApellido(oradorRequest.getApellido());
 		orador.setMail(oradorRequest.getEmail());
 		orador.setTema(oradorRequest.getTema());
-		orador.setNombre(oradorRequest.getResumen());
+		orador.setResumen(oradorRequest.getResumen());
 		
 		//ahora si, actualizo en la db!!
 		this.repository.update(orador);
